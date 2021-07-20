@@ -42,7 +42,7 @@ const thoughtController = {
   },
 
   // delete thought
-  deletePizza({ params }, res) {
+  deleteThought({ params }, res) {
     Thoughts.findOneAndDelete({ _id: params.id })
       .then(dbThoughtData => {
         if (!dbThoughtData) {
