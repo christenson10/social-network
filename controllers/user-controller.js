@@ -1,9 +1,9 @@
-const { Users } = require('../models');
+const { User } = require('../models');
 
 const userController = {
   // get all thoughts
   getAllUsers(req, res) {
-    Thought.find({})
+    User.find({})
       .then(dbUserData => res.json(dbUserData))
       .catch(err => {
         console.log(err);
@@ -13,7 +13,7 @@ const userController = {
 
   // get one user by id
   getUserById({ params }, res) {
-    Pizza.findOne({ _id: params.id })
+    User.findOne({ _id: params.id })
       .then(dbUserData => res.json(dbUserData))
       .catch(err => {
         console.log(err);
@@ -23,14 +23,15 @@ const userController = {
 
   // createUser
   createUser({ body }, res) {
-    Pizza.create(body)
+    console.log(body)
+    User.create(body)
       .then(dbUserData => res.json(dbUserData))
       .catch(err => res.json(err));
   },
 
   // update user by id
   updateUser({ params, body }, res) {
-    Users.findOneAndUpdate({ _id: params.id }, body, { new: true })
+    User.findOneAndUpdate({ _id: params.id }, body, { new: true })
       .then(dbUserData => {
         if (!dbUserData) {
           res.status(404).json({ message: 'No user found with this id!' });
@@ -43,7 +44,7 @@ const userController = {
 
   // delete user
   deleteUser({ params }, res) {
-    Users.findOneAndDelete({ _id: params.id })
+    User.findOneAndDelete({ _id: params.id })
       .then(dbUserData => {
         if (!dbUserData) {
           res.status(404).json({ message: 'No user found with this id!' });
